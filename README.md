@@ -32,6 +32,42 @@ isPlayerWin -- NO --> playerActs
 isPlayerWin -- YES ----> END0
 playerActs --- playerSwitch
 playerSwitch --> isDraw
-
 ```
-### Class Diagrams ###
+
+#### Current player act ####
+```mermaid
+flowchart LR
+START((Start))
+END((Exit))
+
+clickTile[Player cliks on a tile]
+isPlayersPieceOnTile{Is player's piece on tile}
+isPlayersPieceSelected{Is player's piece already selected}
+
+beep[Beeping sound for invalid action]
+
+selectPiece[Highlight selected piece]
+highlightMoves[Highlight possible moves]
+
+
+canMoveToTile{Can move to tile?}
+hasTileOpponent{Has tile oppont}
+exitToBattle((Exit to battle))
+moveToTile[Move to tile]
+
+START --> clickTile
+clickTile --> isPlayersPieceOnTile
+isPlayersPieceOnTile -- NO --> isPlayersPieceSelected
+  isPlayersPieceSelected -- NO --> beep
+  beep --> clickTile
+  isPlayersPieceSelected -- YES --> canMoveToTile
+    canMoveToTile -- NO --> beep
+    canMoveToTile -- YES --> moveToTile
+    moveToTile --> hasTileOpponent
+      hasTileOpponent -- YES --> exitToBattle
+      hasTileOpponent -- NO --> END
+isPlayersPieceOnTile -- YES --> selectPiece
+  selectPiece --> highlightMoves 
+  highlightMoves --> clickTile
+```
+### Class Diagrams ##
