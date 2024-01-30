@@ -4,11 +4,8 @@
 
 ### Flowcharts ###
 
+#### Top level game process ####
 ```mermaid
-
----
-title: High level game process
----
 
 flowchart LR
 START(("Start"))
@@ -35,11 +32,8 @@ playerSwitch --> isDraw
 
 ```
 
+#### Board setup ####
 ```mermaid
-
----
-title: Board setup
----
 
 flowchart LR
 START(("Start"))
@@ -69,11 +63,8 @@ placePiece --> isInvEmpty
 
 ```
 
+#### Is the chosen position valid? ####
 ```mermaid
-
----
-title: Is chosen position valid?
----
 
 flowchart LR
 START(("Start"))
