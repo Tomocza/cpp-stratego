@@ -68,4 +68,26 @@ placePiece --> isInvEmpty
 
 
 ```
+
+```mermaid
+
+---
+title: Is chosen position valid?
+---
+
+flowchart LR
+START(("Start"))
+EXIT0((("Exit NO")))
+EXIT1((("Exit YES")))
+isOwnSide{"Is the position 
+          on the player's side?"}
+isPosEmpty{"Is the position empty?"}
+
+START --> isOwnSide
+isOwnSide -- YES --> isPosEmpty
+isOwnSide -- NO --> EXIT0
+isPosEmpty -- YES --> EXIT1
+isPosEmpty -- NO --> EXIT0
+
+```
 ### Class Diagrams ###
