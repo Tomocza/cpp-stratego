@@ -10,9 +10,10 @@
 title: High level game process
 ---
 
-flowchart TD
+flowchart LR
 START(("Start"))
-boardSetup["Players set their boards up"]
+boardSetup["Players set 
+            their boards up"]
 isDraw{"Is the game 
         a draw?"}
 isPlayerWin{"Is the current
