@@ -88,4 +88,37 @@ isPosEmpty -- YES --> EXIT1
 isPosEmpty -- NO --> EXIT0
 
 ```
+
+#### Battle (attacker perspective) ####
+```mermaid
+
+flowchart LR
+START(("Start"))
+EXIT0((("Exit with loss")))
+EXIT1((("Exit with win")))
+EXIT2((("Exit with draw")))
+isRankEqual{"Are the ranks equal?"}
+isRankHigher{"Is the attacker 
+              ranked higher?"}
+isDefBomb{"Is the defender 
+            a bomb?"}
+isAtkMiner{"Is the attacker 
+            a miner?"}
+isMarshalSpy{"Is the defender 
+              a marshal and the 
+              attacker a spy?"}
+
+START --> isDefBomb
+isDefBomb -- YES --> isAtkMiner
+isAtkMiner -- NO ---> EXIT0
+isAtkMiner -- YES --> EXIT1
+isDefBomb -- NO --> isMarshalSpy
+isMarshalSpy -- YES --> EXIT1
+isMarshalSpy -- NO --> isRankEqual
+isRankEqual -- YES --> EXIT2
+isRankEqual -- NO --> isRankHigher
+isRankHigher -- YES ---> EXIT1
+isRankHigher -- NO ----> EXIT0
+
+```
 ### Class Diagrams ###
