@@ -128,35 +128,40 @@ flowchart LR
 START((Start))
 END((Exit))
 
-clickTile[Player cliks on a tile]
-isPlayersPieceOnTile{Is player's piece on tile}
-isPlayersPieceSelected{Is player's piece already selected}
+clickTile[Player cliks 
+          on a tile]
+isPlayersPieceOnTile{Is player's piece 
+                      on selected tile}
+isPlayersPieceSelected{Is player's piece 
+                        already selected}
 
-beep[Beeping sound for invalid action]
+beep[Beeping sound 
+      for invalid action]
 
-selectPiece[Highlight selected piece]
-highlightMoves[Highlight possible moves]
+selectPiece[Highlight selected piece
+            and its valid moves]
 
 
 canMoveToTile{Can move to tile?}
-hasTileOpponent{Has tile oppont}
-exitToBattle((Exit to battle))
+hasTileOpponent{Tile has 
+                opposing piece}
+battle[Battle]
 moveToTile[Move to tile]
 
 START --> clickTile
 clickTile --> isPlayersPieceOnTile
-isPlayersPieceOnTile -- YES --> selectPiece
-  selectPiece --> highlightMoves 
-  highlightMoves --> clickTile
 isPlayersPieceOnTile -- NO --> isPlayersPieceSelected
+isPlayersPieceOnTile -- YES --> selectPiece
+  selectPiece --> clickTile
   isPlayersPieceSelected -- YES --> canMoveToTile
     canMoveToTile -- YES --> moveToTile
       moveToTile --> hasTileOpponent
-        hasTileOpponent -- YES --> exitToBattle
+        hasTileOpponent -- YES --> battle
         hasTileOpponent -- NO --> END
     canMoveToTile -- NO --> beep
   isPlayersPieceSelected -- NO --> beep
     beep --> clickTile
+  battle --> END
 ```
 
 ### Class Diagrams ###
