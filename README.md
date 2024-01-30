@@ -76,8 +76,12 @@ EXIT1((("Exit YES")))
 isOwnSide{"Is the position 
           on the player's side?"}
 isPosEmpty{"Is the position empty?"}
+isOnBoard{"Does the position 
+           exist on the board?"}
 
-START --> isOwnSide
+START --> isOnBoard
+isOnBoard -- YES --> isOwnSide
+isOnBoard -- NO --> EXIT0
 isOwnSide -- YES --> isPosEmpty
 isOwnSide -- NO --> EXIT0
 isPosEmpty -- YES --> EXIT1
