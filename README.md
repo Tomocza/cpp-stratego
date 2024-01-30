@@ -34,4 +34,38 @@ playerActs --- playerSwitch
 playerSwitch --> isDraw
 
 ```
+
+```mermaid
+
+---
+title: Board setup
+---
+
+flowchart LR
+START(("Start"))
+END0((("Exit")))
+genPieces["Generate pieces 
+          in inventory"]
+selectPiece["Player selects
+            a piece"]
+choosePos["Player chooses 
+           a position for the piece"]
+isValidPos{"Is the chosen 
+            position valid?"}
+placePiece["Piece gets placed"]
+isInvEmpty{"Are there any 
+            pieces left?"}
+
+START --> genPieces
+genPieces --> isInvEmpty
+isInvEmpty -- NO --> selectPiece
+isInvEmpty -- YES --> END0
+selectPiece --> choosePos
+choosePos --> isValidPos
+isValidPos -- NO --> choosePos
+isValidPos -- YES --> placePiece
+placePiece --> isInvEmpty
+
+
+```
 ### Class Diagrams ###
