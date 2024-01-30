@@ -9,6 +9,8 @@
 
 flowchart LR
 START(("Start"))
+playerConfig["Process player 
+              config options"]
 boardSetup["Players set 
             their boards up"]
 isDraw{"Is the game 
@@ -21,7 +23,8 @@ playerSwitch["Current player
 END0((("Exit with winner")))
 END1((("Exit with draw")))
 
-START --> boardSetup
+START --> playerConfig
+playerConfig --> boardSetup
 boardSetup --> isDraw
 isDraw -- NO --> isPlayerWin
 isDraw -- YES -----> END1
