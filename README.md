@@ -25,13 +25,13 @@ END1((("Exit with draw")))
 
 START --> playerConfig
 playerConfig --> boardSetup
-boardSetup --> isDraw
+boardSetup --> playerActs
+playerActs --> isDraw
 isDraw -- NO --> isPlayerWin
 isDraw -- YES -----> END1
-isPlayerWin -- NO --> playerActs
+isPlayerWin -- NO --> playerSwitch
 isPlayerWin -- YES ----> END0
-playerActs --- playerSwitch
-playerSwitch --> isDraw
+playerSwitch --> playerActs
 
 ```
 
