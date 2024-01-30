@@ -145,18 +145,18 @@ moveToTile[Move to tile]
 
 START --> clickTile
 clickTile --> isPlayersPieceOnTile
-isPlayersPieceOnTile -- NO --> isPlayersPieceSelected
-  isPlayersPieceSelected -- NO --> beep
-  beep --> clickTile
-  isPlayersPieceSelected -- YES --> canMoveToTile
-    canMoveToTile -- NO --> beep
-    canMoveToTile -- YES --> moveToTile
-    moveToTile --> hasTileOpponent
-      hasTileOpponent -- YES --> exitToBattle
-      hasTileOpponent -- NO --> END
 isPlayersPieceOnTile -- YES --> selectPiece
   selectPiece --> highlightMoves 
   highlightMoves --> clickTile
+isPlayersPieceOnTile -- NO --> isPlayersPieceSelected
+  isPlayersPieceSelected -- YES --> canMoveToTile
+    canMoveToTile -- YES --> moveToTile
+      moveToTile --> hasTileOpponent
+        hasTileOpponent -- YES --> exitToBattle
+        hasTileOpponent -- NO --> END
+    canMoveToTile -- NO --> beep
+  isPlayersPieceSelected -- NO --> beep
+    beep --> clickTile
 ```
 
 ### Class Diagrams ###
