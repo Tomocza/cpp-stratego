@@ -165,3 +165,92 @@ isPlayersPieceOnTile -- YES --> selectPiece
 ```
 
 ### Class Diagrams ###
+
+```mermaid
+
+classDiagram
+
+class Game{
+  <<Abstract>>
+  -logic: GameLogic
+  +run(): int
+}
+
+class SDL_Game{
+  -display: SDL_Display
+  -handleEvents(): bool
+  +init(): bool
+  +run(): int
+}
+
+class SDL_Display{
+  -window: SDL_Window
+  -renderer: SDL_Renderer
+}
+
+class GameLogic{
+  -board: Tile[][]
+  +getValidMoves(Coord, DeltaCoord[]): Coord[]
+  +getPieceCoord(Piece): Coord
+  +movePiece(Piece, DeltaCoord): void
+}
+
+class Tile{
+  -piece: Piece
+  -isLake: bool
+}
+
+class Piece{
+  <<Abstract>>
+  -movePattern: DeltaCoord[] //static
+  -rank: int
+  -board: Board
+  +attack(Piece): void
+  +getAvailableMoves(): Coord[]
+}
+
+class Bomb{ }
+class Marshal{  }
+class General{  }
+class Colonel{  }
+class Major{  }
+class Captain{  }
+class Lieutenant{ }
+class Sergeant{ }
+class Miner{  }
+class Scout{  }
+class Spy{  }
+class Flag{ }
+
+ 
+class DeltaCoord{
+  -dx: int
+  -dy: int
+}
+
+class Coord{
+  -x: int
+  -y: int
+}
+
+Game <|-- SDL_Game
+Game *-- GameLogic
+SDL_Game *-- SDL_Display
+
+GameLogic *-- Tile
+Tile o-- Piece
+DeltaCoord --o Piece
+
+Piece <|-- Bomb
+Piece <|-- Marshal
+Piece <|-- General
+Piece <|-- Colonel
+Piece <|-- Major
+Piece <|-- Captain
+Piece <|-- Lieutenant
+Piece <|-- Sergeant
+Piece <|-- Miner
+Piece <|-- Scout
+Piece <|-- Spy
+Piece <|-- Flag
+```
