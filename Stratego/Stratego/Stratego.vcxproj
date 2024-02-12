@@ -131,6 +131,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SDL_Display.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="SDL_Game.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SDL_Display.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="SDL_Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
