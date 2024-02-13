@@ -16,7 +16,7 @@ public:
 	std::set<Coordinate> getAvailableMoves() const;
 	virtual ~Piece();
 	Coordinate getPosition();
-	void setPosition(Coordinate newPosition); //const vagy valami?
+	void setPosition(Coordinate newPosition);
 private:
 	const unsigned short rank;
 	Coordinate position;
