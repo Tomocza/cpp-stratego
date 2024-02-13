@@ -13,7 +13,7 @@ int main()
 	//Needed for SDL2 to not redefine main() and therefore cause a linker error
 	SDL_SetMainReady();
 
-	Game* game = new SDL_Game();
+	const auto game = std::make_unique<Game>();
 
 	return game->run();
 }
