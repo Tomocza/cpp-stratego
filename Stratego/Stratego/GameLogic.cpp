@@ -43,7 +43,6 @@ std::vector<Coordinate> GameLogic::getValidCoordinates(Coordinate position,
 	return result;
 }
 
-// TODO
 void GameLogic::movePiece(Piece* piece, const DeltaCoordinate delta)
 {
 	board.at(piece->getPosition().y).at(piece->getPosition().x).piece = nullptr;
