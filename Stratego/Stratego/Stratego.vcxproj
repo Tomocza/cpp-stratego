@@ -155,6 +155,7 @@
 		<ClCompile Include="SDL_Display.cpp" />
 		<ClCompile Include="Game.cpp" />
 		<ClCompile Include="SDL_Game.cpp" />
+		<ClCompile Include="EventReceiver.cpp" />
 		<ClInclude Include="Bomb.h" />
 		<ClInclude Include="Captain.h" />
 		<ClInclude Include="Colonel.h" />
@@ -174,6 +175,7 @@
 		<ClInclude Include="SDL_Display.h" />
 		<ClInclude Include="Game.h" />
 		<ClInclude Include="SDL_Game.h" />
+		<ClInclude Include="EventReceiver.h" />
 	</ItemGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 	<ImportGroup Label="ExtensionTargets">
