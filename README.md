@@ -170,6 +170,13 @@ isPlayersPieceOnTile -- YES --> selectPiece
 
 classDiagram
 
+class EventListener{
+  -std::map<uint32, function> actions
+  +regAction(uint32, function): void
+  +delAction(uint32): void
+  +executeAction(uint32, args...): void
+}
+
 class Game{
   <<Abstract>>
   -logic: GameLogic
@@ -236,6 +243,7 @@ class Coord{
 Game <|-- SDL_Game
 Game *-- GameLogic
 SDL_Game *-- SDL_Display
+SDL_Game *-- EventListener
 
 GameLogic *-- Tile
 Tile o-- Piece
