@@ -1,10 +1,8 @@
 ﻿#pragma once
 #include "Piece.h"
 
-class Tile
+struct Tile
 {
-public:
-	const bool isLake;
-private:
-	Piece piece;
+	bool isLake{false};
+	Piece* piece{nullptr};
 };
