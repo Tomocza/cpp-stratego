@@ -17,18 +17,29 @@ GameLogic::GameLogic()
 	}
 }
 
+Coordinate addPositionToDelta(const Coordinate& position, const DeltaCoordinate& delta)
+{
+	return Coordinate{position.x + delta.x, position.y + delta.y};
+}
+
+bool isOnBoard(const Coordinate c)
+{
+	return c.x >= 0 && c.y >= 0 && c.x < BOARD_DIMENSION && c.y < BOARD_DIMENSION;
+}
+
 std::vector<Coordinate> GameLogic::getValidCoordinates(Coordinate position,
                                                        const std::vector<DeltaCoordinate>& movePattern) const
 {
 	std::vector<Coordinate> coordinates(movePattern.size());
+
 	std::transform(movePattern.begin(), movePattern.end(), coordinates.begin(), coordinates.end(),
-	               [position](const DeltaCoordinate delta)
-	               {
-		               return Coordinate{position.x + delta.x, position.y + delta.y};
-	               });
+	               [position](const DeltaCoordinate delta) { return addPositionToDelta(position, delta); });
+
 	std::vector<Coordinate> result;
+
 	std::copy_if(coordinates.begin(), coordinates.end(), std::back_inserter(result),
-	             [](const Coordinate c) { return c.x >= 0 && c.y >= 0 && c.x < BOARD_DIMENSION && c.y < BOARD_DIMENSION; });
+	             [](const Coordinate c) { return isOnBoard(c); });
+
 	return result;
 }
 
