@@ -6,17 +6,18 @@
 #include "Coordinate.h"
 #include "Piece.h"
 
-constexpr  int BOARD_DIMENSION = 10;
+constexpr int BOARD_DIMENSION = 10;
 
 class GameLogic
 {
 public:
 	GameLogic();
 
-	std::vector<Coordinate> getValidCoordinates(Coordinate position, const std::vector<DeltaCoordinate>& movePattern) const;
+	std::vector<Coordinate> getValidCoordinates(Coordinate position,
+	                                            const std::vector<DeltaCoordinate>& movePattern) const;
 
 	void movePiece(Piece piece, DeltaCoordinate delta);
 
-//private:
+	//private:
 	std::array<std::array<Tile, BOARD_DIMENSION>, BOARD_DIMENSION> board{};
 };
