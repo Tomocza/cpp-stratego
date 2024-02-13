@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <vector>
-
+#include "BattleOutcome.h"
 #include "Coordinate.h"
 
 class Piece
@@ -11,8 +11,9 @@ public:
 	{
 	}
 
-	bool attack(const Piece& opponent) const;
+	BattleOutcome attack(Piece* opponent) const;
 	std::vector<Coordinate> getAvailableMoves() const;
+	virtual ~Piece();
 
 private:
 	const unsigned short rank;

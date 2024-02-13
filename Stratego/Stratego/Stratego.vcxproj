@@ -134,6 +134,7 @@
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="Colonel.cpp" />
     <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="dfsadfg.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="General.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Captain.h" />
     <ClInclude Include="Colonel.h" />
     <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="dfsadfg.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="General.h" />
