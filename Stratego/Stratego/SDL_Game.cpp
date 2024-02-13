@@ -14,6 +14,7 @@ bool SDL_Game::handleEvents()
 		else
 		{
 			er.executeAction(e.type, e, gameLogic);
+			el.executeAction(e.type, e, gameLogic);
 		}
 	}
 

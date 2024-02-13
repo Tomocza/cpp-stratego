@@ -17,7 +17,11 @@ public:
 	{
 		er.regAction(SDL_MOUSEBUTTONDOWN, [](const SDL_Event& e, const GameLogic& logic)
 		{
-			std::cout << "success\n";
+			std::cout << "success-down\n";
+		});
+		er.regAction({SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP}, [](const SDL_Event& e, const GameLogic& logic)
+		{
+			std::cout << "success-down-up\n";
 		});
 	}
 
@@ -25,4 +29,5 @@ private:
 	SDL_Display display;
 	GameLogic gameLogic;
 	EventListener er;
+	EventListener el;
 };
