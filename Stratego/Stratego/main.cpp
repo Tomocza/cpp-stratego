@@ -15,7 +15,7 @@ int main()
 	//Needed for SDL2 to not redefine main() and therefore cause a linker error
 	SDL_SetMainReady();
 
-	Game* game = new SDL_Game;
+	std::cout << "Hello World!\n";
 
 	return game->run();
 }
