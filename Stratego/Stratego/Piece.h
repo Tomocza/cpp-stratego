@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <vector>
-
+#include "BattleOutcome.h"
 #include "Coordinate.h"
+#include <set>
 
 class Piece
 {
@@ -11,12 +12,13 @@ public:
 	{
 	}
 
-	bool attack(const Piece& opponent) const;
-	std::vector<Coordinate> getAvailableMoves() const;
-
+	BattleOutcome attack(Piece* opponent) const;
+	std::set<Coordinate> getAvailableMoves() const;
+	virtual ~Piece();
+	Coordinate getPosition();
+	void setPosition(Coordinate newPosition);
 private:
 	const unsigned short rank;
-
-private:
+	Coordinate position;
 	static const std::vector<DeltaCoordinate> movePattern;
 };
