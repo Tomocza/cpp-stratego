@@ -38,12 +38,24 @@ std::vector<Coordinate> GameLogic::getValidCoordinates(Coordinate position,
 	std::vector<Coordinate> result;
 
 	std::copy_if(coordinates.begin(), coordinates.end(), std::back_inserter(result),
-	             [](const Coordinate c) { return isOnBoard(c); });
+	             [this](const Coordinate c) { return isOnBoard(c) && isTileEmpty(c); });
 
 	return result;
 }
 
 // TODO
-void GameLogic::movePiece(Piece piece, DeltaCoordinate delta)
+void GameLogic::movePiece(Piece* piece, const DeltaCoordinate delta)
 {
+	board.at(piece->getPosition().y).at(piece->getPosition().x).piece = nullptr;
+
+	Coordinate newPosition{piece->getPosition().x + delta.x, piece->getPosition().y + delta.y};
+
+	piece->setPosition(newPosition);
+
+	board.at(newPosition.y).at(newPosition.x).piece = piece;
+}
+
+bool GameLogic::isTileEmpty(const Coordinate& c) const
+{
+	return !board.at(c.y).at(c.x).piece;
 }
