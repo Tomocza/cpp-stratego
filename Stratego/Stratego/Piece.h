@@ -2,6 +2,7 @@
 #include <vector>
 #include "BattleOutcome.h"
 #include "Coordinate.h"
+#include <set>
 
 class Piece
 {
@@ -12,12 +13,12 @@ public:
 	}
 
 	BattleOutcome attack(Piece* opponent) const;
-	std::vector<Coordinate> getAvailableMoves() const;
+	std::set<Coordinate> getAvailableMoves() const;
 	virtual ~Piece();
-
+	Coordinate getPosition();
+	void setPosition(Coordinate newPosition); //const vagy valami?
 private:
 	const unsigned short rank;
-
-private:
+	Coordinate position;
 	static const std::vector<DeltaCoordinate> movePattern;
 };

@@ -4,7 +4,7 @@
 #include "Marshal.h"
 #include "Spy.h"
 
-
+//TODO: smart ptrs?
 BattleOutcome Piece::attack(Piece* opponent) const
 {//attacker perspective
 	if(Bomb* bomb = dynamic_cast<Bomb*>(opponent)){
@@ -27,8 +27,23 @@ BattleOutcome Piece::attack(Piece* opponent) const
 	}
 }
 
-// TODO
-std::vector<Coordinate> Piece::getAvailableMoves() const
+std::set<Coordinate> Piece::getAvailableMoves() const
 {
-	return std::vector<Coordinate>{Coordinate{0,0}};
+	std::set<Coordinate> result;
+	for (int i = 0; i < movePattern.size(); i++) {
+		short x = position.x + movePattern.at(i).x;
+		short y = position.y + movePattern.at(i).y;
+		result.insert(Coordinate{x,y});
+	}
+	return result;
+}
+
+Coordinate Piece::getPosition()
+{
+	return position;
+}
+
+void Piece::setPosition(Coordinate newPosition)
+{
+	this->position = newPosition;
 }
