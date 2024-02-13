@@ -10,11 +10,13 @@ GameLogic::GameLogic()
 // TODO: Implement
 std::vector<Coordinate> GameLogic::getValidCoordinates(Coordinate position, DeltaCoordinate movePattern) const
 {
+	return std::vector<Coordinate>{};
 }
 
 // TODO: implement
 Coordinate GameLogic::getCoordinateOf(Piece piece) const
 {
+	return Coordinate{ 0,0 };
 }
 
 // TODO: implement
