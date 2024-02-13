@@ -7,9 +7,13 @@ bool SDL_Game::handleEvents()
 
 	while (SDL_PollEvent(&e) != 0)
 	{
-		if (e.type == SDL_QUIT || e.type == SDL_MOUSEBUTTONDOWN)
+		if (e.type == SDL_QUIT)
 		{
 			quit = true;
+		}
+		else
+		{
+			er.executeAction(e.type, e, gameLogic);
 		}
 	}
 
