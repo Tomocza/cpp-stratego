@@ -245,6 +245,8 @@ Game *-- GameLogic
 SDL_Game *-- SDL_Display
 SDL_Game *-- EventListener
 
+EventListener o-- GameLogic
+
 GameLogic *-- Tile
 Tile o-- Piece
 DeltaCoord --o Piece
