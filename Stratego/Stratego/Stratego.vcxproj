@@ -134,7 +134,6 @@
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="Colonel.cpp" />
     <ClCompile Include="Coordinate.cpp" />
-    <ClCompile Include="dfsadfg.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="General.cpp" />
@@ -163,6 +162,7 @@
     <ClInclude Include="Marshal.h" />
     <ClInclude Include="Miner.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scout.h" />
     <ClInclude Include="Sergant.h" />
     <ClInclude Include="Spy.h" />
