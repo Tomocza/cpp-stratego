@@ -71,7 +71,7 @@ bool SDL_Game::init()
 
 bool SDL_Game::createWindow()
 {
-	window = SDL_CreateWindow("Stratego", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Stratego", 100, 100, 1366, 768, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
