@@ -13,13 +13,19 @@ class GameLogic
 public:
 	GameLogic();
 
-	std::vector<Coordinate> getValidCoordinates(Coordinate position,
-	                                            const std::vector<DeltaCoordinate>& movePattern) const;
+	std::vector<Coordinate> getValidCoordinates(Piece* piece) const;
 
-	void movePiece(Piece* piece, const DeltaCoordinate delta);
+	void movePiece(Piece* piece, const Coordinate newPosition);
+	const Player& getCurrentPlayer() const;
+	void switchCurrentPlayer();
 
-	private:
+private:
 	std::array<std::array<Tile, BOARD_DIMENSION>, BOARD_DIMENSION> board{};
+	Player currentPlayer{ RED };
 
-	bool isTileEmpty(const Coordinate& c) const;
+	bool hasOwnPieceAt(const Coordinate& c, const Player p) const;
+	bool hasOpponentPieceAt(const Coordinate& c, const Player p) const;
+
+	const Tile& getTileAt(const Coordinate c) const;
+	Tile& getTileAt(const Coordinate c);
 };

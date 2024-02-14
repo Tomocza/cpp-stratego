@@ -1,60 +1,150 @@
 ﻿#include "GameLogic.h"
 
 #include <algorithm>
-#include <iterator>
 
 #include "Coordinate.h"
+#include "Scout.h"
 
 GameLogic::GameLogic()
 {
-	const std::vector<Coordinate> waterTiles{
+	const std::vector<Coordinate> waterCoordinates{
 		Coordinate{2, 4}, Coordinate{3, 4}, Coordinate{6, 4}, Coordinate{7, 4},
 		Coordinate{2, 5}, Coordinate{3, 5}, Coordinate{6, 5}, Coordinate{7, 5}
 	};
-	for (const Coordinate waterTile : waterTiles)
+	for (const auto c : waterCoordinates)
 	{
-		board.at(waterTile.y).at(waterTile.x).isLake = true;
+		getTileAt(c).isLake = true;
 	}
 }
 
-Coordinate addPositionToDelta(const Coordinate& position, const DeltaCoordinate& delta)
-{
-	return Coordinate{position.x + delta.x, position.y + delta.y};
-}
-
-bool isOnBoard(const Coordinate c)
+bool isOnBoard(const Coordinate& c)
 {
 	return c.x >= 0 && c.y >= 0 && c.x < BOARD_DIMENSION && c.y < BOARD_DIMENSION;
 }
 
-std::vector<Coordinate> GameLogic::getValidCoordinates(Coordinate position,
-                                                       const std::vector<DeltaCoordinate>& movePattern) const
+bool GameLogic::hasOwnPieceAt(const Coordinate& c, const Player p) const
 {
-	std::vector<Coordinate> coordinates(movePattern.size());
+	return getTileAt(c).piece->getPlayer() == p;
+}
 
-	std::transform(movePattern.begin(), movePattern.end(), coordinates.begin(), coordinates.end(),
-	               [position](const DeltaCoordinate delta) { return addPositionToDelta(position, delta); });
+bool GameLogic::hasOpponentPieceAt(const Coordinate& c, const Player p) const
+{
+	auto o = getTileAt(c).piece->getPlayer();
+	return (p == RED && o == BLUE) || (p == BLUE && o == RED);
+}
 
-	std::vector<Coordinate> result;
+std::vector<Coordinate> GameLogic::getValidCoordinates(Piece* piece) const
+{
+	auto result = piece->getAvailableMoves();
+	int maxX, maxY, minX, minY;
+	const auto position = piece->getPosition();
 
-	std::copy_if(coordinates.begin(), coordinates.end(), std::back_inserter(result),
-	             [this](const Coordinate c) { return isOnBoard(c) && isTileEmpty(c); });
+	for (int i = 1; ; i++)
+	{
+		Coordinate c{position.x + i, position.y};
+		const auto t = getTileAt(c);
+		const auto p = piece->getPlayer();
+
+		if (hasOwnPieceAt(c, p) or !isOnBoard(c) or t.isLake)
+		{
+			maxX = c.x - 1;
+			break;
+		}
+		else if (hasOpponentPieceAt(c, p))
+		{
+			maxX = c.x;
+			break;
+		}
+	}
+
+	for (int i = 1; ; i++)
+	{
+		Coordinate c{position.x - i, position.y};
+		const auto t = getTileAt(c);
+		const auto p = piece->getPlayer();
+
+		if (hasOwnPieceAt(c, p) or !isOnBoard(c) or t.isLake)
+		{
+			minX = c.x + 1;
+			break;
+		}
+		else if (hasOpponentPieceAt(c, p))
+		{
+			minX = c.x;
+			break;
+		}
+	}
+
+	for (int i = 1; ; i++)
+	{
+		Coordinate c{position.x, position.y + i};
+		const auto t = getTileAt(c);
+		const auto p = piece->getPlayer();
+
+		if (hasOwnPieceAt(c, p) or !isOnBoard(c) or t.isLake)
+		{
+			maxY = c.x - 1;
+			break;
+		}
+		else if (hasOpponentPieceAt(c, p))
+		{
+			maxY = c.x;
+			break;
+		}
+	}
+
+	for (int i = 1; ; i++)
+	{
+		Coordinate c{position.x, position.y - i};
+		const auto t = getTileAt(c);
+		const auto p = piece->getPlayer();
+
+		if (hasOwnPieceAt(c, p) or !isOnBoard(c) or t.isLake)
+		{
+			minY = c.x + 1;
+			break;
+		}
+		else if (hasOpponentPieceAt(c, p))
+		{
+			minY = c.x;
+			break;
+		}
+	}
+
+
+	result.erase(std::remove_if(result.begin(), result.end(), [this, piece, maxX, maxY, minX, minY](const Coordinate c)
+	{
+		return not isOnBoard(c) or hasOwnPieceAt(c, piece->getPlayer()) or getTileAt(c).isLake or
+			c.x > maxX or c.x < minX or c.y > maxY or c.y < minY;
+	}), result.end());
 
 	return result;
 }
 
-void GameLogic::movePiece(Piece* piece, const DeltaCoordinate delta)
+void GameLogic::movePiece(Piece* piece, const Coordinate newPosition)
 {
-	board.at(piece->getPosition().y).at(piece->getPosition().x).piece = nullptr;
-
-	Coordinate newPosition{piece->getPosition().x + delta.x, piece->getPosition().y + delta.y};
-
+	getTileAt(piece->getPosition()).piece.reset();
 	piece->setPosition(newPosition);
-
-	board.at(newPosition.y).at(newPosition.x).piece = piece;
+	getTileAt(newPosition).piece.reset(piece);
 }
 
-bool GameLogic::isTileEmpty(const Coordinate& c) const
+const Tile& GameLogic::getTileAt(const Coordinate c) const
 {
-	return !board.at(c.y).at(c.x).piece;
+	return board.at(c.y).at(c.x);
+}
+
+Tile& GameLogic::getTileAt(const Coordinate c)
+{
+	return board.at(c.y).at(c.x);
+}
+
+const Player& GameLogic::getCurrentPlayer() const
+{
+	return currentPlayer;
+}
+
+void GameLogic::switchCurrentPlayer()
+{
+	if (currentPlayer == RED) currentPlayer = BLUE;
+	else currentPlayer = RED;
 }
