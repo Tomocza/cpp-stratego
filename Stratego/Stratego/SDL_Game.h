@@ -6,6 +6,9 @@
 #include "Game.h"
 #include "SDL2/SDL.h"
 
+constexpr int WIN_W = 1280;
+constexpr int WIN_H = 800;
+
 class SDL_Game :
 	public Game
 {

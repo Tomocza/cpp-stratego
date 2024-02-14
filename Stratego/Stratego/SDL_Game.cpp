@@ -53,17 +53,14 @@ bool SDL_Game::init()
 	if (!createWindow()) return false;
 	if (!createRenderer()) return false;
 
-	PanelComp board({20, 0, 200, 200});
-	board.setColor(255, 0, 0, SDL_ALPHA_OPAQUE);
-
-	PanelComp p1({10, 10, 10, 10});
-	p1.setColor(0, 255, 0, SDL_ALPHA_OPAQUE);
-
-	board.registerComponent(std::make_shared<PanelComp>(p1));
+	//Create board panel
+	PanelComp board({0, 0, WIN_H, WIN_H});
+	board.setColor(0, 255, 0, SDL_ALPHA_OPAQUE);
 	components.push_back(std::make_shared<PanelComp>(board));
 
-	PanelComp infoPanel({250, 0, 100, 100});
-	infoPanel.setColor(0, 0, 255, SDL_ALPHA_OPAQUE);
+	//Create info panel
+	PanelComp infoPanel({WIN_H, 0, WIN_W - WIN_H, WIN_H});
+	infoPanel.setColor(255, 255, 255, SDL_ALPHA_OPAQUE);
 	components.push_back(std::make_shared<PanelComp>(infoPanel));
 
 	return true;
@@ -71,7 +68,7 @@ bool SDL_Game::init()
 
 bool SDL_Game::createWindow()
 {
-	window = SDL_CreateWindow("Stratego", 100, 100, 1366, 768, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Stratego", 100, 100, WIN_W, WIN_H, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
