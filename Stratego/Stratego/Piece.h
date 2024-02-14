@@ -1,22 +1,29 @@
 ﻿#pragma once
 #include <vector>
-
+#include "BattleOutcome.h"
 #include "Coordinate.h"
+#include <set>
+
+#include "Player.h"
 
 class Piece
 {
 public:
-	explicit Piece(unsigned short rank)
-		: rank(rank)
+	explicit Piece(const unsigned short rank, const Player player)
+		: player(player), rank(rank)
 	{
 	}
 
-	bool attack(const Piece& opponent) const;
+	BattleOutcome attack(Piece* opponent) const;
 	std::vector<Coordinate> getAvailableMoves() const;
+	virtual ~Piece() = default;
+	Coordinate getPosition() const;
+	void setPosition(const Coordinate newPosition);
+	Player getPlayer() const;
 
 private:
+	const Player player;
 	const unsigned short rank;
-
-private:
-	static const std::vector<DeltaCoordinate> movePattern;
+	Coordinate position{-1, -1};
+	std::vector<DeltaCoordinate> movePattern;
 };

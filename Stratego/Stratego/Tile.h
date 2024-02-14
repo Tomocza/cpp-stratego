@@ -1,10 +1,10 @@
 ﻿#pragma once
+#include <memory>
+
 #include "Piece.h"
 
-class Tile
+struct Tile
 {
-public:
-	const bool isLake;
-private:
-	Piece piece;
+	bool isLake{false};
+	std::shared_ptr<Piece> piece;
 };

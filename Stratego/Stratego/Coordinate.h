@@ -2,8 +2,8 @@
 
 struct Coordinate
 {
-	short x;
-	short y;
+	int x;
+	int y;
 };
 
 using DeltaCoordinate = Coordinate;
