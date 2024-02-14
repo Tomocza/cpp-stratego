@@ -4,20 +4,16 @@
 //Needed for SDL2 to not redefine main() and therefore cause a linker error
 #define SDL_MAIN_HANDLED
 
-#include <iostream>
+#include "Game.h"
+#include "SDL_Game.h"
 
-#include "Coordinate.h"
-#include <SDL2/SDL.h>
 
 int main()
 {
 	//Needed for SDL2 to not redefine main() and therefore cause a linker error
 	SDL_SetMainReady();
 
-	Coordinate c{1, 2};
-	DeltaCoordinate d{ 2, 3 };
-	std::cout << c.x << '\n' << d.y;
-	std::cout << "Hello World!\n";
+	const std::unique_ptr<Game> game = std::make_unique<SDL_Game>();
 
-	return 0;
+	return game->run();
 }

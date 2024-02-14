@@ -107,6 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,9 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundComp.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="Colonel.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameLogic.cpp" />
@@ -147,11 +150,14 @@
     <ClCompile Include="Sergant.cpp" />
     <ClCompile Include="Spy.cpp" />
     <ClCompile Include="Tile.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="SDL_Game.cpp" />
+    <ClCompile Include="EventListener.cpp" />
+    <ClInclude Include="BackgroundComp.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Captain.h" />
     <ClInclude Include="Colonel.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="dfsadfg.h" />
     <ClInclude Include="Flag.h" />
@@ -167,6 +173,9 @@
     <ClInclude Include="Sergant.h" />
     <ClInclude Include="Spy.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="SDL_Game.h" />
+    <ClInclude Include="EventListener.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
