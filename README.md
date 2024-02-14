@@ -177,6 +177,16 @@ class EventListener{
   +executeAction(uint32, args...): void
 }
 
+class Component{
+  <<Abstract>>
+  +render(SDL_Renderer*): void
+  #rect: SDL_Rect
+}
+
+class BackgroundComp{
+  +render(SDL_Renderer*):void
+}
+
 class Game{
   <<Abstract>>
   -logic: GameLogic
@@ -187,6 +197,8 @@ class SDL_Game{
   -display: SDL_Display
   -window: SDL_Window
   -renderer: SDL_Renderer
+  -listeners: EventListener*[]
+  -components: Component*[]
   -handleEvents(): bool
   +init(): bool
   +run(): int
@@ -241,6 +253,9 @@ Game <|-- SDL_Game
 Game *-- GameLogic
 SDL_Game *-- EventListener
 EventListener o-- GameLogic
+
+Component <|-- BackgroundComp
+SDL_Game *-- Component
 
 GameLogic *-- Tile
 Tile o-- Piece
