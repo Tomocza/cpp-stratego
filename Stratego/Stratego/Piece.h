@@ -25,5 +25,5 @@ private:
 	const Player player;
 	const unsigned short rank;
 	Coordinate position{-1, -1};
-	std::vector<DeltaCoordinate> movePattern;
+	std::vector<DeltaCoordinate> movePattern{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 };
