@@ -7,17 +7,17 @@
 BattleOutcome Piece::attack(Piece* opponent) const
 {
 	//attacker perspective
-	if (Bomb* bomb = dynamic_cast<Bomb*>(opponent))
+	if (dynamic_cast<Bomb*>(opponent))
 	{
-		if (const Miner* miner = dynamic_cast<const Miner*>(this))
+		if (dynamic_cast<const Miner*>(this))
 		{
 			return WIN;
 		}
 		return LOSE;
 	}
-	if (Marshal* marshal = dynamic_cast<Marshal*>(opponent))
+	if (dynamic_cast<Marshal*>(opponent))
 	{
-		if (const Spy* spy = dynamic_cast<const Spy*>(this))
+		if (dynamic_cast<const Spy*>(this))
 		{
 			return WIN;
 		}

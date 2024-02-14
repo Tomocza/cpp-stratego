@@ -2,7 +2,6 @@
 #include <vector>
 #include "BattleOutcome.h"
 #include "Coordinate.h"
-#include <set>
 
 #include "Player.h"
 
