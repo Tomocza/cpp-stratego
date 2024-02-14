@@ -1,8 +1,10 @@
 ﻿#pragma once
+#include <memory>
+
 #include "Piece.h"
 
 struct Tile
 {
 	bool isLake{false};
-	Piece* piece{nullptr};
+	std::shared_ptr<Piece> piece;
 };
