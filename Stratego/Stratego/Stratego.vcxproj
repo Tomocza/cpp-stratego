@@ -148,7 +148,6 @@
     <ClCompile Include="Sergant.cpp" />
     <ClCompile Include="Spy.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="SDL_Display.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
     <ClCompile Include="EventListener.cpp" />
@@ -168,7 +167,6 @@
     <ClInclude Include="Sergant.h" />
     <ClInclude Include="Spy.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="SDL_Display.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="SDL_Game.h" />
     <ClInclude Include="EventListener.h" />

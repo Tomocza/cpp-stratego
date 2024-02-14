@@ -185,14 +185,11 @@ class Game{
 
 class SDL_Game{
   -display: SDL_Display
+  -window: SDL_Window
+  -renderer: SDL_Renderer
   -handleEvents(): bool
   +init(): bool
   +run(): int
-}
-
-class SDL_Display{
-  -window: SDL_Window
-  -renderer: SDL_Renderer
 }
 
 class GameLogic{
@@ -242,9 +239,7 @@ class Coord{
 
 Game <|-- SDL_Game
 Game *-- GameLogic
-SDL_Game *-- SDL_Display
 SDL_Game *-- EventListener
-
 EventListener o-- GameLogic
 
 GameLogic *-- Tile

@@ -3,17 +3,13 @@
 
 #include "EventListener.h"
 #include "Game.h"
-#include "SDL_Display.h"
+#include "SDL2/SDL.h"
 
 class SDL_Game :
 	public Game
 {
 public:
-	bool handleEvents();
-	~SDL_Game() override = default;
-	int run() override;
-
-	SDL_Game()
+	SDL_Game() : window(nullptr), renderer(nullptr)
 	{
 		er.regAction(SDL_MOUSEBUTTONDOWN, [](const SDL_Event& e, const GameLogic& logic)
 		{
@@ -25,9 +21,23 @@ public:
 		});
 	}
 
+	~SDL_Game() override
+	{
+		SDL_DestroyRenderer(renderer);
+		SDL_DestroyWindow(window);
+		SDL_Quit();
+	}
+
+	bool handleEvents();
+	int run() override;
+
 private:
-	SDL_Display display;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 	GameLogic gameLogic;
 	EventListener er;
 	EventListener el;
+	bool init();
+	bool createWindow();
+	bool createRenderer();
 };
