@@ -28,7 +28,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	GameLogic gameLogic;
-	std::vector<std::shared_ptr<EventListener>> listerners;
+	std::vector<std::shared_ptr<EventListener>> listeners;
 	std::vector<std::shared_ptr<Component>> components;
 	bool init();
 	bool createWindow();
