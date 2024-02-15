@@ -18,6 +18,6 @@ public:
 private:
 	std::string text;
 	std::string fontName{"Roboto-Regular.ttf"};
-	int fontSize{16};
+	int fontSize{72};
 	SDL_Color color{0, 0, 0,SDL_ALPHA_OPAQUE};
 };
