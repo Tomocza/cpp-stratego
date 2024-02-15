@@ -10,6 +10,7 @@ class PieceComp :
 	public EventListener
 {
 public:
+	PieceComp(const SDL_Rect& rectangle, Piece& piece) : Component(rectangle), piece(std::make_shared<Piece>(piece)) {};
 	void render(SDL_Renderer* renderer) override;
 
 private:
