@@ -4,6 +4,18 @@
 
 #include "Coordinate.h"
 #include "Scout.h"
+#include "Bomb.h"
+#include "Marshal.h"
+#include "General.h"
+#include "Colonel.h"
+#include "Major.h"
+#include "Captain.h"
+#include "Liutenant.h"
+#include "Sergant.h"
+#include "Miner.h"
+#include "Scout.h"
+#include "Spy.h"
+#include "Flag.h"
 
 GameLogic::GameLogic()
 {
@@ -15,6 +27,74 @@ GameLogic::GameLogic()
 	{
 		getTileAt(c).isLake = true;
 	}
+
+	pieces = generatePieces();
+}
+
+std::vector<std::shared_ptr<Piece>> GameLogic::generatePieces()
+{
+	constexpr int NUMBERS_OF_PLAYERS = 2;
+
+	constexpr int NUMBER_OF_BOMBS = 6;
+	constexpr int NUMBER_OF_MARSHALS = 1;
+	constexpr int NUMBER_OF_GENERALS = 1;
+	constexpr int NUMBER_OF_COLONELS = 2;
+	constexpr int NUMBER_OF_MAJORS = 3;
+	constexpr int NUMBER_OF_CAPTAINS = 4;
+	constexpr int NUMBER_OF_LIUTENANTS = 4;
+	constexpr int NUMBER_OF_SERGANTS = 4;
+	constexpr int NUMBER_OF_MINERS = 5;
+	constexpr int NUMBER_OF_SCOUTS = 8;
+	constexpr int NUMBER_OF_SPYS = 1;
+	constexpr int NUMBER_OF_FLAGS = 1;
+
+	constexpr int RANK_OF_BOMBS = 11;
+	constexpr int RANK_OF_MARSHALS = 10;
+	constexpr int RANK_OF_GENERALS = 9;
+	constexpr int RANK_OF_COLONELS = 8;
+	constexpr int RANK_OF_MAJORS = 7;
+	constexpr int RANK_OF_CAPTAINS = 6;
+	constexpr int RANK_OF_LIUTENANTS = 5;
+	constexpr int RANK_OF_SERGANTS = 4;
+	constexpr int RANK_OF_MINERS = 3;
+	constexpr int RANK_OF_SCOUTS = 2;
+	constexpr int RANK_OF_SPYS = 1;
+	constexpr int RANK_OF_FLAGS = 0;
+
+	std::vector<std::shared_ptr<Piece>> result(80);
+
+	for (int i = 0; i < result.size(); i++) {
+		for (int j = 0; j < NUMBERS_OF_PLAYERS; j++) {
+			Player player = j == 0 ? RED : BLUE;
+			for (int k = 0; i < NUMBER_OF_BOMBS; k++) {
+				result.emplace_back(std::make_shared<Bomb>(RANK_OF_BOMBS, player));
+			}
+			result.emplace_back(std::make_shared<Marshal>(RANK_OF_MARSHALS, player));
+			result.emplace_back(std::make_shared<Colonel>(RANK_OF_COLONELS, player));
+			for (int k = 0; i < NUMBER_OF_MAJORS; k++) {
+				result.emplace_back(std::make_shared<Major>(RANK_OF_MAJORS, player));
+			}
+			for (int k = 0; i < NUMBER_OF_CAPTAINS; k++) {
+				result.emplace_back(std::make_shared<Captain>(RANK_OF_CAPTAINS, player));
+			}
+			for (int k = 0; i < NUMBER_OF_LIUTENANTS; k++) {
+				result.emplace_back(std::make_shared<Liutenant>(RANK_OF_LIUTENANTS, player));
+			}
+			for (int k = 0; i < NUMBER_OF_SERGANTS; k++) {
+				result.emplace_back(std::make_shared<Sergant>(RANK_OF_SERGANTS, player));
+			}
+			for (int k = 0; i < NUMBER_OF_MINERS; k++) {
+				result.emplace_back(std::make_shared<Miner>(RANK_OF_MINERS, player));
+			}
+			for (int k = 0; i < NUMBER_OF_SCOUTS; k++) {
+				result.emplace_back(std::make_shared<Scout>(RANK_OF_SCOUTS, player));
+			}
+			result.emplace_back(std::make_shared<Spy>(RANK_OF_SPYS, player));
+			result.emplace_back(std::make_shared<Flag>(RANK_OF_FLAGS, player));
+		}
+	}
+
+	return result;
 }
 
 bool isOnBoard(const Coordinate& c)

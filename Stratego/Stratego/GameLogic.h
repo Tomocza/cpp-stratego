@@ -7,6 +7,7 @@
 #include "Piece.h"
 
 constexpr int BOARD_DIMENSION = 10;
+constexpr int NUMBER_OF_PIECES = 80;
 
 class GameLogic
 {
@@ -21,6 +22,7 @@ public:
 
 private:
 	std::array<std::array<Tile, BOARD_DIMENSION>, BOARD_DIMENSION> board{};
+	std::vector<std::shared_ptr<Piece>> pieces{NUMBER_OF_PIECES};
 	Player currentPlayer{ RED };
 
 	bool hasOwnPieceAt(const Coordinate& c, const Player p) const;
@@ -28,4 +30,6 @@ private:
 
 	const Tile& getTileAt(const Coordinate c) const;
 	Tile& getTileAt(const Coordinate c);
+
+	static std::vector<std::shared_ptr<Piece>> generatePieces();
 };
