@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LabelComp.cpp" />
     <ClCompile Include="PanelComp.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Captain.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
     <ClCompile Include="EventListener.cpp" />
+    <ClInclude Include="LabelComp.h" />
     <ClInclude Include="PanelComp.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Captain.h" />
@@ -169,6 +171,7 @@
     <ClInclude Include="Miner.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scout.h" />
     <ClInclude Include="Sergant.h" />
     <ClInclude Include="Spy.h" />
@@ -176,6 +179,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="SDL_Game.h" />
     <ClInclude Include="EventListener.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

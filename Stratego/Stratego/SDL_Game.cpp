@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <memory>
 #include <iostream>
+#include <memory>
 
+#include "LabelComp.h"
 #include "PanelComp.h"
 
 
@@ -53,6 +55,7 @@ bool SDL_Game::init()
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
 	if (!createWindow()) return false;
 	if (!createRenderer()) return false;
+	if (TTF_Init() != 0) return false;
 
 	//Create board panel
 	PanelComp board({0, 0, WIN_H, WIN_H});
@@ -62,6 +65,10 @@ bool SDL_Game::init()
 	//Create info panel
 	PanelComp infoPanel({WIN_H, 0, WIN_W - WIN_H, WIN_H});
 	infoPanel.setColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+
+	LabelComp label1("this is a test label", {10, 10, 100, 100});
+
+	infoPanel.registerComponent(std::make_shared<LabelComp>(label1));
 	components.push_back(std::make_shared<PanelComp>(infoPanel));
 
 	return true;
