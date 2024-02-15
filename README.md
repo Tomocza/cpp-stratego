@@ -190,6 +190,11 @@ class LabelComp{
   -fontSize: int
 }
 
+class ButtonComp{
+  +render(SDL_Renderer*): void
+  -label: LabelComp
+}
+
 class PanelComp{
   +render(SDL_Renderer*):void
   +registerComponent(Component*):void
@@ -266,6 +271,9 @@ EventListener o-- GameLogic
 
 Component <|-- PanelComp
 Component <|-- LabelComp
+Component <|-- ButtonComp
+EventListener <|-- ButtonComp
+ButtonComp o-- LabelComp
 SDL_Game *-- Component
 
 GameLogic *-- Tile
