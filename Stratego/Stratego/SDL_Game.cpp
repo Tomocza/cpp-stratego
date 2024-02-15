@@ -1,7 +1,10 @@
 #include "SDL_Game.h"
 
-#include "BackgroundComp.h"
-#include "Component.h"
+#include <algorithm>
+#include <memory>
+#include <iostream>
+
+#include "PanelComp.h"
 
 
 bool SDL_Game::handleEvents()
@@ -17,10 +20,11 @@ bool SDL_Game::handleEvents()
 		}
 		else
 		{
-			for (const auto& listener : listerners)
-			{
-				listener->executeAction(e.type, e, gameLogic);
-			}
+			std::for_each(listeners.begin(), listeners.end(),
+			              [e, this](const std::shared_ptr<EventListener>& listener)
+			              {
+				              listener->executeAction(e.type, e, gameLogic);
+			              });
 		}
 	}
 
@@ -50,15 +54,22 @@ bool SDL_Game::init()
 	if (!createWindow()) return false;
 	if (!createRenderer()) return false;
 
-	BackgroundComp bg({0, 0, 200, 200});
-	components.push_back(std::make_shared<BackgroundComp>(bg));
+	//Create board panel
+	PanelComp board({0, 0, WIN_H, WIN_H});
+	board.setColor(0, 255, 0, SDL_ALPHA_OPAQUE);
+	components.push_back(std::make_shared<PanelComp>(board));
+
+	//Create info panel
+	PanelComp infoPanel({WIN_H, 0, WIN_W - WIN_H, WIN_H});
+	infoPanel.setColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+	components.push_back(std::make_shared<PanelComp>(infoPanel));
 
 	return true;
 }
 
 bool SDL_Game::createWindow()
 {
-	window = SDL_CreateWindow("Stratego", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Stratego", 100, 100, WIN_W, WIN_H, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
