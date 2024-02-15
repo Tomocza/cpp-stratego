@@ -19,6 +19,10 @@ public:
 	void movePiece(Piece* piece, const Coordinate newPosition);
 	const Player& getCurrentPlayer() const;
 	void switchCurrentPlayer();
+	std::vector<std::shared_ptr<Piece>>& getPieces();
+	const Tile& getTileAt(const Coordinate c) const;
+	Tile& getTileAt(const Coordinate c);
+
 
 private:
 	std::array<std::array<Tile, BOARD_DIMENSION>, BOARD_DIMENSION> board{};
@@ -28,8 +32,6 @@ private:
 	bool hasOwnPieceAt(const Coordinate& c, const Player p) const;
 	bool hasOpponentPieceAt(const Coordinate& c, const Player p) const;
 
-	const Tile& getTileAt(const Coordinate c) const;
-	Tile& getTileAt(const Coordinate c);
-
 	static std::vector<std::shared_ptr<Piece>> generatePieces();
+	void placePiecesOnBoard();
 };

@@ -97,6 +97,27 @@ std::vector<std::shared_ptr<Piece>> GameLogic::generatePieces()
 	return result;
 }
 
+void GameLogic::placePiecesOnBoard()
+{
+	for (auto& piece : pieces) {
+		int minY = piece->getPlayer() == RED ? 6 : 0;
+		int maxY = piece->getPlayer() == RED ? 9 : 3;
+
+		while (true) {
+			int x = rand() % BOARD_DIMENSION;
+			int y = rand() % (maxY - minY + 1) + minY;
+
+			if (!getTileAt({ x, y }).piece)
+			{
+				getTileAt({ x, y }).piece = piece;
+				break;
+			}
+		}
+	}
+}
+
+
+
 bool isOnBoard(const Coordinate& c)
 {
 	return c.x >= 0 && c.y >= 0 && c.x < BOARD_DIMENSION && c.y < BOARD_DIMENSION;
@@ -227,4 +248,9 @@ void GameLogic::switchCurrentPlayer()
 {
 	if (currentPlayer == RED) currentPlayer = BLUE;
 	else currentPlayer = RED;
+}
+
+std::vector<std::shared_ptr<Piece>>& GameLogic::getPieces()
+{
+	return pieces;
 }
