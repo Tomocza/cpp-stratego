@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonComp.cpp" />
+    <ClCompile Include="LabelComp.cpp" />
     <ClCompile Include="PanelComp.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Captain.cpp" />
@@ -155,6 +157,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
     <ClCompile Include="EventListener.cpp" />
+    <ClInclude Include="ButtonComp.h" />
+    <ClInclude Include="LabelComp.h" />
     <ClInclude Include="PanelComp.h" />
     <ClCompile Include="TileComp.cpp" />
     <ClInclude Include="Bomb.h" />
@@ -186,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Stratego.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

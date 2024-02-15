@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL2/SDL_ttf.h>
+
 #include "Component.h"
 #include "EventListener.h"
 #include "Game.h"
@@ -20,6 +22,7 @@ public:
 	{
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
+		TTF_Quit();
 		SDL_Quit();
 	}
 
