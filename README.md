@@ -183,8 +183,11 @@ class Component{
   #rect: SDL_Rect
 }
 
-class BackgroundComp{
+class PanelComp{
   +render(SDL_Renderer*):void
+  +registerComponent(Component*):void
+  +removeComponent(Component*):void
+  -components: std::vector<Component*>
 }
 
 class Game{
@@ -254,7 +257,7 @@ Game *-- GameLogic
 SDL_Game *-- EventListener
 EventListener o-- GameLogic
 
-Component <|-- BackgroundComp
+Component <|-- PanelComp
 SDL_Game *-- Component
 
 GameLogic *-- Tile

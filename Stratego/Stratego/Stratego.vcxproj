@@ -131,7 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackgroundComp.cpp" />
+    <ClCompile Include="PanelComp.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="Colonel.cpp" />
@@ -153,7 +153,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
     <ClCompile Include="EventListener.cpp" />
-    <ClInclude Include="BackgroundComp.h" />
+    <ClInclude Include="PanelComp.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Captain.h" />
     <ClInclude Include="Colonel.h" />

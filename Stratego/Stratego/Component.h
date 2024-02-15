@@ -18,4 +18,5 @@ public:
 
 	virtual ~Component() = default;
 	virtual void render(SDL_Renderer* renderer) = 0;
+	virtual void move(const int dx, const int dy);
 };
