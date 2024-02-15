@@ -66,7 +66,7 @@ bool SDL_Game::init()
 	PanelComp infoPanel({WIN_H, 0, WIN_W - WIN_H, WIN_H});
 	infoPanel.setColor(255, 255, 255, SDL_ALPHA_OPAQUE);
 
-	LabelComp label1("this is a test label", {10, 10, 100, 100});
+	LabelComp label1({10, 10, 200, 50}, "This is a test label");
 
 	infoPanel.registerComponent(std::make_shared<LabelComp>(label1));
 	components.push_back(std::make_shared<PanelComp>(infoPanel));

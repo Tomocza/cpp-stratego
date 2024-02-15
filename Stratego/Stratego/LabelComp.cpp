@@ -3,9 +3,7 @@
 
 void LabelComp::render(SDL_Renderer* renderer)
 {
-	TTF_Font* font = TTF_OpenFont("Roboto-Regular.ttf", 24);
-	SDL_Color color{0, 0, 0,SDL_ALPHA_OPAQUE};
-
+	TTF_Font* font = TTF_OpenFont(fontName.c_str(), fontSize);
 	auto surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	auto msgTexture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -14,4 +12,15 @@ void LabelComp::render(SDL_Renderer* renderer)
 	TTF_CloseFont(font);
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(msgTexture);
+}
+
+void LabelComp::setColor(const SDL_Color& c)
+{
+	this->color = c;
+}
+
+void LabelComp::setFont(const std::string& name, const int size)
+{
+	this->fontName = name;
+	this->fontSize = size;
 }

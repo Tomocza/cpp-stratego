@@ -7,16 +7,17 @@ class LabelComp :
 	public Component
 {
 public:
-	LabelComp(std::string str): text(std::move(str))
-	{
-	}
-
-	LabelComp(std::string str, const SDL_Rect& r) : Component(r), text(std::move(str))
+	LabelComp(const SDL_Rect& r, std::string str) : Component(r), text(std::move(str))
 	{
 	}
 
 	void render(SDL_Renderer* renderer) override;
+	void setColor(const SDL_Color& c);
+	void setFont(const std::string& name, int size);
 
 private:
 	std::string text;
+	std::string fontName{"Roboto-Regular.ttf"};
+	int fontSize{16};
+	SDL_Color color{0, 0, 0,SDL_ALPHA_OPAQUE};
 };
