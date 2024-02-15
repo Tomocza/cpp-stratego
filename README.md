@@ -183,6 +183,13 @@ class Component{
   #rect: SDL_Rect
 }
 
+class LabelComp{
+  +render(SDL_Renderer*): void
+  -text: string
+  -fontName: string
+  -fontSize: int
+}
+
 class PanelComp{
   +render(SDL_Renderer*):void
   +registerComponent(Component*):void
@@ -258,6 +265,7 @@ SDL_Game *-- EventListener
 EventListener o-- GameLogic
 
 Component <|-- PanelComp
+Component <|-- LabelComp
 SDL_Game *-- Component
 
 GameLogic *-- Tile
