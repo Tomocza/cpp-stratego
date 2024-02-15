@@ -4,7 +4,10 @@
 #include <memory>
 #include <iostream>
 #include <memory>
+#include <memory>
+#include <memory>
 
+#include "ButtonComp.h"
 #include "LabelComp.h"
 #include "PanelComp.h"
 
@@ -68,7 +71,11 @@ bool SDL_Game::init()
 
 	LabelComp label1({10, 10, 200, 50}, "This is a test label");
 
+	std::shared_ptr<ButtonComp> button1(new ButtonComp({10, 200, 100, 40}, "button"));
+
 	infoPanel.registerComponent(std::make_shared<LabelComp>(label1));
+	infoPanel.registerComponent(button1);
+	listeners.push_back(button1);
 	components.push_back(std::make_shared<PanelComp>(infoPanel));
 
 	return true;
