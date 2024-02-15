@@ -5,6 +5,8 @@
 #include <iostream>
 
 #include "PanelComp.h"
+#include "PieceComp.h"
+#include "TileComp.h"
 
 
 bool SDL_Game::handleEvents()
@@ -63,6 +65,22 @@ bool SDL_Game::init()
 	PanelComp infoPanel({WIN_H, 0, WIN_W - WIN_H, WIN_H});
 	infoPanel.setColor(255, 255, 255, SDL_ALPHA_OPAQUE);
 	components.push_back(std::make_shared<PanelComp>(infoPanel));
+
+	//Create piece components
+	for (auto& piece : gameLogic.getPieces()) {
+		SDL_Rect rect{ 0, 0, 80, 80};
+		std::shared_ptr<PieceComp> pieceComp = std::make_shared<PieceComp>(rect, piece);
+		components.push_back(pieceComp);
+	}
+
+	//Create tile components
+	for (int y = 0; y < BOARD_DIMENSION; y++) {
+		for (int x = 0; x < BOARD_DIMENSION; x++) {
+			SDL_Rect rect{ x * 80, y * 80, 80, 80 };
+			Tile& tile = gameLogic.getTileAt({ x, y });
+			std::shared_ptr<TileComp> tileComp = std::make_shared<TileComp>(rect, tile);
+		}
+	}
 
 	return true;
 }
