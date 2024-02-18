@@ -20,18 +20,18 @@ public:
 	const Player& getCurrentPlayer() const;
 	void switchCurrentPlayer();
 	std::vector<std::shared_ptr<Piece>>& getPieces();
-	const Tile& getTileAt(const Coordinate c) const;
 	Tile& getTileAt(const Coordinate c);
+	void placePiecesOnBoard();
 
 
 private:
 	std::array<std::array<Tile, BOARD_DIMENSION>, BOARD_DIMENSION> board{};
-	std::vector<std::shared_ptr<Piece>> pieces{NUMBER_OF_PIECES};
+	std::vector<std::shared_ptr<Piece>> pieces;
 	Player currentPlayer{ RED };
 
 	bool hasOwnPieceAt(const Coordinate& c, const Player p) const;
 	bool hasOpponentPieceAt(const Coordinate& c, const Player p) const;
 
-	static std::vector<std::shared_ptr<Piece>> generatePieces();
-	void placePiecesOnBoard();
+	std::vector<std::shared_ptr<Piece>> generatePieces();
+	const Tile& getTileAt(const Coordinate c) const;
 };

@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Piece.h"
 
-class Marshal : Piece
+class Marshal : public Piece
 {
 public:
-	
+	Marshal(const unsigned short rank, const Player player) : Piece(rank, player) {}
 };

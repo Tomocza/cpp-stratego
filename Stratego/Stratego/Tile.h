@@ -7,4 +7,5 @@ struct Tile
 {
 	bool isLake{false};
 	std::shared_ptr<Piece> piece;
+	Coordinate coordinate;
 };

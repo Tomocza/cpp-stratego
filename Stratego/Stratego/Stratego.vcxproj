@@ -194,6 +194,11 @@
   <ItemGroup>
     <Font Include="Roboto-Regular.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Pictures\Stratego\bomb_blue.bmp" />
+    <Image Include="..\..\..\..\..\Pictures\Stratego\bomb_red.bmp" />
+    <Image Include="bitmap1.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

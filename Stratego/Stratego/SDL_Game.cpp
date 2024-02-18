@@ -80,22 +80,30 @@ bool SDL_Game::init()
 	listeners.push_back(button1);
 	components.push_back(std::make_shared<PanelComp>(infoPanel));
 
-	//Create piece components
-	for (auto& piece : gameLogic.getPieces()) {
-		SDL_Rect rect{ 0, 0, 80, 80};
-		std::shared_ptr<PieceComp> pieceComp = std::make_shared<PieceComp>(rect, piece);
-		components.push_back(pieceComp);
-	}
+	//Place pieces on board randomly
+	gameLogic.placePiecesOnBoard();
 
-	//Create tile components
+	//Create components for pieces & tiles
 	for (int y = 0; y < BOARD_DIMENSION; y++) {
 		for (int x = 0; x < BOARD_DIMENSION; x++) {
 			SDL_Rect rect{ x * 80, y * 80, 80, 80 };
+			//SDL_Rect rectForPiece{ 0, 0, 80, 80 };
+
 			Tile& tile = gameLogic.getTileAt({ x, y });
-			std::shared_ptr<TileComp> tileComp = std::make_shared<TileComp>(rect, tile);
+
+			std::shared_ptr<PieceComp> pieceComp;
+			if(!tile.piece)
+			{
+				pieceComp = std::make_shared<PieceComp>(rect, tile.piece, "BOMB");
+			}
+
+			std::shared_ptr<TileComp> tileComp = std::make_shared<TileComp>(rect, std::make_shared<Tile>(tile), pieceComp);
+			board.registerComponent(tileComp);
+			listeners.push_back(tileComp);
+			components.push_back(tileComp);
 		}
 	}
-
+	
 	return true;
 }
 

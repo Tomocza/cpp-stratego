@@ -8,7 +8,7 @@
 class Piece
 {
 public:
-	explicit Piece(const unsigned short rank, const Player player)
+	explicit Piece(const int rank, const Player player)
 		: player(player), rank(rank)
 	{
 	}

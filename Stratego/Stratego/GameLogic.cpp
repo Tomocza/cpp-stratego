@@ -1,6 +1,7 @@
 ﻿#include "GameLogic.h"
 
 #include <algorithm>
+#include <iostream>
 
 #include "Coordinate.h"
 #include "Scout.h"
@@ -19,6 +20,13 @@
 
 GameLogic::GameLogic()
 {
+	for(int x = 0; x < BOARD_DIMENSION; x++)
+	{
+		for(int y = 0; y < BOARD_DIMENSION; y++)
+		{
+			getTileAt({ x, y }).coordinate = { x, y };
+		}
+	}
 	const std::vector<Coordinate> waterCoordinates{
 		Coordinate{2, 4}, Coordinate{3, 4}, Coordinate{6, 4}, Coordinate{7, 4},
 		Coordinate{2, 5}, Coordinate{3, 5}, Coordinate{6, 5}, Coordinate{7, 5}
@@ -27,8 +35,7 @@ GameLogic::GameLogic()
 	{
 		getTileAt(c).isLake = true;
 	}
-
-	pieces = generatePieces();
+	//pieces = generatePieces();
 }
 
 std::vector<std::shared_ptr<Piece>> GameLogic::generatePieces()
@@ -61,32 +68,38 @@ std::vector<std::shared_ptr<Piece>> GameLogic::generatePieces()
 	constexpr int RANK_OF_SPYS = 1;
 	constexpr int RANK_OF_FLAGS = 0;
 
-	std::vector<std::shared_ptr<Piece>> result(80);
+	std::vector<std::shared_ptr<Piece>> result(NUMBER_OF_PIECES);
 
 	for (int i = 0; i < result.size(); i++) {
 		for (int j = 0; j < NUMBERS_OF_PLAYERS; j++) {
 			Player player = j == 0 ? RED : BLUE;
-			for (int k = 0; i < NUMBER_OF_BOMBS; k++) {
-				result.emplace_back(std::make_shared<Bomb>(RANK_OF_BOMBS, player));
+			for (int k = 0; k < NUMBER_OF_BOMBS; k++) {
+				std::shared_ptr<Bomb> b = std::make_shared<Bomb>(RANK_OF_BOMBS, player);
+				result.emplace_back(b);
 			}
 			result.emplace_back(std::make_shared<Marshal>(RANK_OF_MARSHALS, player));
-			result.emplace_back(std::make_shared<Colonel>(RANK_OF_COLONELS, player));
-			for (int k = 0; i < NUMBER_OF_MAJORS; k++) {
+			result.emplace_back(std::make_shared<General>(RANK_OF_GENERALS, player));
+			for (int k = 0; k < NUMBER_OF_COLONELS; k++)
+			{
+				result.emplace_back(std::make_shared<Colonel>(RANK_OF_COLONELS, player));
+
+			}
+			for (int k = 0; k < NUMBER_OF_MAJORS; k++) {
 				result.emplace_back(std::make_shared<Major>(RANK_OF_MAJORS, player));
 			}
-			for (int k = 0; i < NUMBER_OF_CAPTAINS; k++) {
+			for (int k = 0; k < NUMBER_OF_CAPTAINS; k++) {
 				result.emplace_back(std::make_shared<Captain>(RANK_OF_CAPTAINS, player));
 			}
-			for (int k = 0; i < NUMBER_OF_LIUTENANTS; k++) {
+			for (int k = 0; k < NUMBER_OF_LIUTENANTS; k++) {
 				result.emplace_back(std::make_shared<Liutenant>(RANK_OF_LIUTENANTS, player));
 			}
-			for (int k = 0; i < NUMBER_OF_SERGANTS; k++) {
+			for (int k = 0; k < NUMBER_OF_SERGANTS; k++) {
 				result.emplace_back(std::make_shared<Sergant>(RANK_OF_SERGANTS, player));
 			}
-			for (int k = 0; i < NUMBER_OF_MINERS; k++) {
+			for (int k = 0; k < NUMBER_OF_MINERS; k++) {
 				result.emplace_back(std::make_shared<Miner>(RANK_OF_MINERS, player));
 			}
-			for (int k = 0; i < NUMBER_OF_SCOUTS; k++) {
+			for (int k = 0; k < NUMBER_OF_SCOUTS; k++) {
 				result.emplace_back(std::make_shared<Scout>(RANK_OF_SCOUTS, player));
 			}
 			result.emplace_back(std::make_shared<Spy>(RANK_OF_SPYS, player));
@@ -99,14 +112,14 @@ std::vector<std::shared_ptr<Piece>> GameLogic::generatePieces()
 
 void GameLogic::placePiecesOnBoard()
 {
-	for (auto& piece : pieces) {
-		int minY = piece->getPlayer() == RED ? 6 : 0;
-		int maxY = piece->getPlayer() == RED ? 9 : 3;
+	for (const auto& piece : pieces) {
+		const int minY = piece->getPlayer() == RED ? 6 : 0;
+		const int maxY = piece->getPlayer() == RED ? 9 : 3;
 
 		while (true) {
-			int x = rand() % BOARD_DIMENSION;
-			int y = rand() % (maxY - minY + 1) + minY;
-
+			const int x = rand() % BOARD_DIMENSION;
+			const int y = rand() % (maxY - minY + 1) + minY;
+			
 			if (!getTileAt({ x, y }).piece)
 			{
 				getTileAt({ x, y }).piece = piece;
